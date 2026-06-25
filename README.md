@@ -1,7 +1,7 @@
 # MedMonstros — Backend
 
 API REST de agendamento medico para criaturas sobrenaturais.
-Projeto da disciplina de Programacao Orientada a Objetos.
+Projeto da disciplina de LP1.
 
 ## Tecnologias
 
@@ -37,5 +37,5 @@ mvn spring-boot:run
 - Console H2: `http://localhost:8080/h2-console`
   (URL `jdbc:h2:file:./data/medmonstros`, usuario `sa`, senha vazia)
 
-O schema e gerado automaticamente pelo Hibernate a partir das classes `@Entity` — nao ha SQL manual.
+O schema e gerado automaticamente pelo Hibernate a partir das classes `@Entity` — não há SQL manual.
 Os dados ficam em `data/medmonstros.mv.db` e sobrevivem ao restart.
