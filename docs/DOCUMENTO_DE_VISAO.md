@@ -63,7 +63,7 @@ demonstrando os principais conceitos de POO.
 
 ## 5. Funcionalidades Principais
 - **Autenticacao:** cadastro de perfil (medico/paciente) e login.
-- **Gestao de Usuarios:** edicao/remocao de pacientes e medicos.
+- **Gestao de Usuarios:** cadastro e consulta de pacientes e medicos.
 - **Gestao de Especialidades:** cadastro e associacao a medicos.
 - **Gestao de Agenda:** definicao e consulta de horarios.
 - **Gestao de Consultas:** solicitar, aceitar, recusar, cancelar e realizar.
