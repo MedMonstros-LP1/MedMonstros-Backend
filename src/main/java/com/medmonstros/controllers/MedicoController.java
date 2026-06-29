@@ -4,8 +4,10 @@ import com.medmonstros.dtos.MedicoDetalheDTO;
 import com.medmonstros.dtos.MedicoResumoDTO;
 import com.medmonstros.services.MedicoService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,5 +31,17 @@ public class MedicoController {
     @GetMapping("/{id}")
     public ResponseEntity<MedicoDetalheDTO> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarDetalhesPorId(id));
+    }
+
+    @PostMapping("/{medicoId}/especialidades/{espId}")
+    public ResponseEntity<Void> associarEspecialidade(@PathVariable Long medicoId, @PathVariable Long espId) {
+        service.associarEspecialidade(medicoId, espId);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{medicoId}/especialidades/{espId}")
+    public ResponseEntity<Void> desassociarEspecialidade(@PathVariable Long medicoId, @PathVariable Long espId) {
+        service.desassociarEspecialidade(medicoId, espId);
+        return ResponseEntity.ok().build();
     }
 }
