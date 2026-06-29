@@ -4,8 +4,6 @@ import com.medmonstros.dtos.EspecialidadeRequestDTO;
 import com.medmonstros.dtos.EspecialidadeResponseDTO;
 import com.medmonstros.entities.Especialidade;
 import com.medmonstros.repositories.EspecialidadeRepository;
-// Importe aqui a exceção de recurso não encontrado do seu projeto, ex:
-// com.medmonstros.exceptions.RecursoNaoEncontradoException; 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,7 +30,6 @@ public class EspecialidadeService {
     public EspecialidadeResponseDTO buscarPorId(Long id) {
         Especialidade especialidade = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Especialidade não encontrada com o ID: " + id)); 
-                // 💡 Dica: Substitua RuntimeException pela classe RecursoNaoEncontradoException do projeto se ela existir.
         return new EspecialidadeResponseDTO(especialidade);
     }
 

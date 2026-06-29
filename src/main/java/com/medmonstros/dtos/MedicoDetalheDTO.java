@@ -15,7 +15,7 @@ public record MedicoDetalheDTO(
         this(
             medico.getId(),
             medico.getNome(),
-            medico.getEmail(), // Herdado de Usuario, conforme relatório do agente
+            medico.getEmail(),
             medico.getRegistroConselho(),
             medico.getEspecialidades().stream()
                 .map(EspecialidadeResponseDTO::new)

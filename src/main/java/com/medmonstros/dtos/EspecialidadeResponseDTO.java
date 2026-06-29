@@ -7,7 +7,6 @@ public record EspecialidadeResponseDTO(
     String nome,
     Boolean atendeEtereos
 ) {
-    // Um construtor de conveniência para mapear a Entidade direto para o DTO
     public EspecialidadeResponseDTO(Especialidade especialidade) {
         this(especialidade.getId(), especialidade.getNome(), especialidade.isAtendeEtereos());
     }
