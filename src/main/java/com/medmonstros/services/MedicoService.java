@@ -19,14 +19,12 @@ public class MedicoService {
         this.medicoRepository = medicoRepository;
     }
 
-    @Transactional(readOnly = true)
     public List<MedicoResumoDTO> listarTodos() {
         return medicoRepository.findAll().stream()
                 .map(MedicoResumoDTO::new)
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
     public MedicoDetalheDTO buscarDetalhesPorId(Long id) {
         Medico medico = medicoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Médico não encontrado."));

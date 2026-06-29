@@ -19,14 +19,12 @@ public class EspecialidadeService {
         this.repository = repository;
     }
 
-    @Transactional(readOnly = true)
     public List<EspecialidadeResponseDTO> listarTodas() {
         return repository.findAll().stream()
                 .map(EspecialidadeResponseDTO::new)
                 .collect(Collectors.toList());
     }
 
-    @Transactional(readOnly = true)
     public EspecialidadeResponseDTO buscarPorId(Long id) {
         Especialidade especialidade = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Especialidade não encontrada com o ID: " + id)); 
