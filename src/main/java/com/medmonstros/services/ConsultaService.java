@@ -58,9 +58,10 @@ public class ConsultaService {
 
         // 3. Validar que o médico não tem outra consulta ACEITA no mesmo horário (RN03 completo)
         boolean medicoComConsultaAceitaNesseHorario = consultaRepository.findAll().stream()
-                .anyMatch(c -> 
+                .anyMatch(c ->
                     c.getMedico().getId().equals(medicoId) &&
                     c.getStatus() == StatusConsulta.ACEITA &&
+                    c.getHorario() != null &&
                     c.getHorario().getId().equals(horarioId)
                 );
         
@@ -123,6 +124,7 @@ public class ConsultaService {
                         !c.getId().equals(consulta.getId()) &&
                         c.getMedico().getId().equals(consulta.getMedico().getId()) &&
                         c.getStatus() == StatusConsulta.ACEITA &&
+                        c.getHorario() != null &&
                         c.getHorario().getId().equals(consulta.getHorario().getId()));
 
         if (jaExisteConsultaAceita) {
@@ -148,6 +150,7 @@ public class ConsultaService {
     public Consulta recusar(Long consultaId) {
         Consulta consulta = obterConsulta(consultaId);
         consulta.recusar();
+        consulta.liberarHorario();
         return consultaRepository.save(consulta);
     }
 
@@ -171,6 +174,7 @@ public class ConsultaService {
         }
         
         consulta.cancelar();
+        consulta.liberarHorario();
         return consultaRepository.save(consulta);
     }
 

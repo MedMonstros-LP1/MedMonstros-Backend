@@ -15,14 +15,18 @@ public record ConsultaDetailDTO(
         TratamentoResponseDTO tratamento
 ) {
     public static ConsultaDetailDTO de(Consulta consulta) {
-        HorarioDTO horarioDTO = consulta.getHorario() != null ?
-                new HorarioDTO(
-                        consulta.getHorario().getId(),
-                        consulta.getHorario().getInicio(),
-                        consulta.getHorario().getFim(),
-                        consulta.getHorario().isLuaCheia(),
-                        consulta.getHorario().isOcupado()
-                ) : null;
+        HorarioDTO horarioDTO;
+        if (consulta.getHorario() != null) {
+            horarioDTO = new HorarioDTO(
+                    consulta.getHorario().getId(),
+                    consulta.getHorario().getInicio(),
+                    consulta.getHorario().getFim(),
+                    consulta.getHorario().isLuaCheia(),
+                    consulta.getHorario().isOcupado()
+            );
+        } else {
+            horarioDTO = new HorarioDTO(null, consulta.getHorarioInicio(), null, false, false);
+        }
 
         TratamentoResponseDTO tratamentoDTO = consulta.getTratamento() != null ?
                 TratamentoResponseDTO.de(consulta.getTratamento()) : null;
