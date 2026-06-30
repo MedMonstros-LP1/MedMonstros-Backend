@@ -113,6 +113,21 @@ public class ConsultaService {
     @Transactional
     public Consulta aceitar(Long consultaId) {
         Consulta consulta = obterConsulta(consultaId);
+
+        if (consulta.getHorario().isOcupado()) {
+            throw new RegraNegocioException("Horário já está ocupado.");
+        }
+
+        boolean jaExisteConsultaAceita = consultaRepository.findAll().stream()
+                .anyMatch(c ->
+                        !c.getId().equals(consulta.getId()) &&
+                        c.getMedico().getId().equals(consulta.getMedico().getId()) &&
+                        c.getStatus() == StatusConsulta.ACEITA &&
+                        c.getHorario().getId().equals(consulta.getHorario().getId()));
+
+        if (jaExisteConsultaAceita) {
+            throw new RegraNegocioException("Médico já possui uma consulta aceita neste horário.");
+        }
         
         // A entidade já faz a validação de transição
         consulta.aceitar();

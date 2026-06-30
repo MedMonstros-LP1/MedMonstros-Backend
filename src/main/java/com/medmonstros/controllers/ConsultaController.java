@@ -2,7 +2,6 @@ package com.medmonstros.controllers;
 
 import com.medmonstros.dtos.ConsultaDetailDTO;
 import com.medmonstros.dtos.ConsultaRequestDTO;
-import com.medmonstros.dtos.ConsultaResumoDTO;
 import com.medmonstros.dtos.TratamentoRequestDTO;
 import com.medmonstros.entities.Consulta;
 import com.medmonstros.services.ConsultaService;
@@ -54,10 +53,10 @@ public class ConsultaController {
      * Resposta 200 - lista
      */
     @GetMapping("/paciente/{pacienteId}")
-    public ResponseEntity<List<ConsultaResumoDTO>> obterPorPaciente(@PathVariable Long pacienteId) {
+    public ResponseEntity<List<ConsultaDetailDTO>> obterPorPaciente(@PathVariable Long pacienteId) {
         List<Consulta> consultas = consultaService.obterPorPaciente(pacienteId);
-        List<ConsultaResumoDTO> dtos = consultas.stream()
-                .map(ConsultaResumoDTO::de)
+        List<ConsultaDetailDTO> dtos = consultas.stream()
+                .map(ConsultaDetailDTO::de)
                 .toList();
         return ResponseEntity.ok(dtos);
     }
@@ -69,10 +68,10 @@ public class ConsultaController {
      * Resposta 200 - lista
      */
     @GetMapping("/medico/{medicoId}")
-    public ResponseEntity<List<ConsultaResumoDTO>> obterPorMedico(@PathVariable Long medicoId) {
+    public ResponseEntity<List<ConsultaDetailDTO>> obterPorMedico(@PathVariable Long medicoId) {
         List<Consulta> consultas = consultaService.obterPorMedico(medicoId);
-        List<ConsultaResumoDTO> dtos = consultas.stream()
-                .map(ConsultaResumoDTO::de)
+        List<ConsultaDetailDTO> dtos = consultas.stream()
+                .map(ConsultaDetailDTO::de)
                 .toList();
         return ResponseEntity.ok(dtos);
     }
