@@ -16,6 +16,6 @@ public record HorarioRequestDTO(
     boolean luaCheia
 ) {
     public HorarioRequestDTO {
-        // luaCheia defaults to false when not provided (primitive boolean default)
+        // luaCheia é false por padrão.
     }
 }
