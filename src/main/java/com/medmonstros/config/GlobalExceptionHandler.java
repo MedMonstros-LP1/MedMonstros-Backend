@@ -5,6 +5,7 @@ import com.medmonstros.exceptions.RecursoNaoEncontradoException;
 import com.medmonstros.exceptions.RegraNegocioException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -28,6 +29,16 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(CredenciaisInvalidasException.class)
     public ResponseEntity<Map<String, Object>> credenciais(CredenciaisInvalidasException ex) {
         return montarResposta(HttpStatus.UNAUTHORIZED, ex.getMessage());
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<Map<String, Object>> mensagemIlegivel(HttpMessageNotReadableException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Map.of(
+            "timestamp", LocalDateTime.now().toString(),
+            "status", 400,
+            "erro", "Dados invalidos",
+            "mensagem", "Especie invalida. Valores aceitos: VAMPIRO, LOBISOMEM, FANTASMA"
+        ));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

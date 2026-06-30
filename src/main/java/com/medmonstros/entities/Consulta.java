@@ -32,6 +32,8 @@ public class Consulta {
     @JoinColumn(name = "horario_id")
     private HorarioDisponivel horario;
 
+    private LocalDateTime horarioInicio;
+
     @Enumerated(EnumType.STRING)
     private StatusConsulta status = StatusConsulta.SOLICITADA;
 
@@ -50,12 +52,15 @@ public class Consulta {
         this.paciente = paciente;
         this.medico = medico;
         this.horario = horario;
+        this.horarioInicio = horario.getInicio();
     }
 
-    public void aceitar()  { transicionar(StatusConsulta.ACEITA); }    // RN04
+    public void aceitar()  { transicionar(StatusConsulta.ACEITA); }
     public void recusar()  { transicionar(StatusConsulta.RECUSADA); }
-    public void cancelar() { transicionar(StatusConsulta.CANCELADA); } // RN06
-    public void realizar() { transicionar(StatusConsulta.REALIZADA); } // RN05
+    public void cancelar() { transicionar(StatusConsulta.CANCELADA); }
+    public void realizar() { transicionar(StatusConsulta.REALIZADA); }
+
+    public void liberarHorario() { this.horario = null; }
 
     private void transicionar(StatusConsulta novo) {
         if (!TRANSICOES.getOrDefault(status, Set.of()).contains(novo)) {
